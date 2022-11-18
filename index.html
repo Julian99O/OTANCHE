@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
+        <style>
+        #map {
+            width: 1323px;
+            height: 813px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+        <script src="data/Ecosistemas_Otanche_1.js"></script>
+        <script src="data/CurvasNivel_Otanche_2.js"></script>
+        <script src="data/Construcciones_Otanche_3.js"></script>
+        <script src="data/Vas_Otanche_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[5.662336550265481,-73.25057826067255],[5.865971291260071,-72.91999242500057]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_Ecosistemas_Otanche_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>NOM_DEPART</strong><br />' + (feature.properties['NOM_DEPART'] !== null ? autolinker.link(feature.properties['NOM_DEPART'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NOM_MUNICI</strong><br />' + (feature.properties['NOM_MUNICI'] !== null ? autolinker.link(feature.properties['NOM_MUNICI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>AREA</strong><br />' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>VEGETACION</strong><br />' + (feature.properties['VEGETACION'] !== null ? autolinker.link(feature.properties['VEGETACION'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>AGROECOSIS</strong><br />' + (feature.properties['AGROECOSIS'] !== null ? autolinker.link(feature.properties['AGROECOSIS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>BIOMA</strong><br />' + (feature.properties['BIOMA'] !== null ? autolinker.link(feature.properties['BIOMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ECOSISTEMA</strong><br />' + (feature.properties['ECOSISTEMA'] !== null ? autolinker.link(feature.properties['ECOSISTEMA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Ecosistemas_Otanche_1_0(feature) {
+            switch(String(feature.properties['ECOSISTEMA'])) {
+                case 'Agroecosistemas campesinos mixtos':
+                    return {
+                pane: 'pane_Ecosistemas_Otanche_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,219,18,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Agroecosistemas Lecheros':
+                    return {
+                pane: 'pane_Ecosistemas_Otanche_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,88,122,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Areas rurales intervenidas':
+                    return {
+                pane: 'pane_Ecosistemas_Otanche_1',
+                opacity: 1,
+                color: 'rgba(153,153,30,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,255,3,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'BMD Andinos y Alto-andinos de Roble':
+                    return {
+                pane: 'pane_Ecosistemas_Otanche_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,198,95,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'BMD Húmedos Andinos':
+                    return {
+                pane: 'pane_Ecosistemas_Otanche_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(106,130,201,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Ecosistemas_Otanche_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,129,213,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Ecosistemas_Otanche_1');
+        map.getPane('pane_Ecosistemas_Otanche_1').style.zIndex = 401;
+        map.getPane('pane_Ecosistemas_Otanche_1').style['mix-blend-mode'] = 'normal';
+        var layer_Ecosistemas_Otanche_1 = new L.geoJson(json_Ecosistemas_Otanche_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Ecosistemas_Otanche_1',
+            layerName: 'layer_Ecosistemas_Otanche_1',
+            pane: 'pane_Ecosistemas_Otanche_1',
+            onEachFeature: pop_Ecosistemas_Otanche_1,
+            style: style_Ecosistemas_Otanche_1_0,
+        });
+        bounds_group.addLayer(layer_Ecosistemas_Otanche_1);
+        map.addLayer(layer_Ecosistemas_Otanche_1);
+        function pop_CurvasNivel_Otanche_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ALTURA_SOB'] !== null ? autolinker.link(feature.properties['ALTURA_SOB'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO_CURVA'] !== null ? autolinker.link(feature.properties['TIPO_CURVA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PROYECTO'] !== null ? autolinker.link(feature.properties['PROYECTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SYMBOL'] !== null ? autolinker.link(feature.properties['SYMBOL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ISVISIBLE'] !== null ? autolinker.link(feature.properties['ISVISIBLE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RULEID'] !== null ? autolinker.link(feature.properties['RULEID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_MULTI'] !== null ? autolinker.link(feature.properties['ID_MULTI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['BK_MULTI'] !== null ? autolinker.link(feature.properties['BK_MULTI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA'] !== null ? autolinker.link(feature.properties['ESCALA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CAMBIO'] !== null ? autolinker.link(feature.properties['CAMBIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VIGENCIA'] !== null ? autolinker.link(feature.properties['VIGENCIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHA_MODI'] !== null ? autolinker.link(feature.properties['FECHA_MODI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RESPONSABL'] !== null ? autolinker.link(feature.properties['RESPONSABL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PK_CUE'] !== null ? autolinker.link(feature.properties['PK_CUE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_150'] !== null ? autolinker.link(feature.properties['ESCALA_150'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_200'] !== null ? autolinker.link(feature.properties['ESCALA_200'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_300'] !== null ? autolinker.link(feature.properties['ESCALA_300'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_350'] !== null ? autolinker.link(feature.properties['ESCALA_350'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_400'] !== null ? autolinker.link(feature.properties['ESCALA_400'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_500'] !== null ? autolinker.link(feature.properties['ESCALA_500'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_750'] !== null ? autolinker.link(feature.properties['ESCALA_750'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ESCALA_100'] !== null ? autolinker.link(feature.properties['ESCALA_100'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_LEN'] !== null ? autolinker.link(feature.properties['SHAPE_LEN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CurvasNivel_Otanche_2_0() {
+            return {
+                pane: 'pane_CurvasNivel_Otanche_2',
+                opacity: 1,
+                color: 'rgba(26,22,7,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CurvasNivel_Otanche_2');
+        map.getPane('pane_CurvasNivel_Otanche_2').style.zIndex = 402;
+        map.getPane('pane_CurvasNivel_Otanche_2').style['mix-blend-mode'] = 'normal';
+        var layer_CurvasNivel_Otanche_2 = new L.geoJson(json_CurvasNivel_Otanche_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CurvasNivel_Otanche_2',
+            layerName: 'layer_CurvasNivel_Otanche_2',
+            pane: 'pane_CurvasNivel_Otanche_2',
+            onEachFeature: pop_CurvasNivel_Otanche_2,
+            style: style_CurvasNivel_Otanche_2_0,
+        });
+        bounds_group.addLayer(layer_CurvasNivel_Otanche_2);
+        function pop_Construcciones_Otanche_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['codigo'] !== null ? autolinker.link(feature.properties['codigo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['terreno_co'] !== null ? autolinker.link(feature.properties['terreno_co'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipo_const'] !== null ? autolinker.link(feature.properties['tipo_const'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tipo_domin'] !== null ? autolinker.link(feature.properties['tipo_domin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['numero_pis'] !== null ? autolinker.link(feature.properties['numero_pis'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['numero_sot'] !== null ? autolinker.link(feature.properties['numero_sot'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['numero_mez'] !== null ? autolinker.link(feature.properties['numero_mez'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['numero_sem'] !== null ? autolinker.link(feature.properties['numero_sem'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['codigo_ant'] !== null ? autolinker.link(feature.properties['codigo_ant'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_ESPACIA'] !== null ? autolinker.link(feature.properties['ID_ESPACIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA_OFICI'] !== null ? autolinker.link(feature.properties['AREA_OFICI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ENTIDAD_TE'] !== null ? autolinker.link(feature.properties['ENTIDAD_TE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_DEPART'] !== null ? autolinker.link(feature.properties['NOM_DEPART'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_MUNICI'] !== null ? autolinker.link(feature.properties['NOM_MUNICI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_DEPTO'] !== null ? autolinker.link(feature.properties['COD_DEPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_DANE'] !== null ? autolinker.link(feature.properties['COD_DANE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_AREA'] !== null ? autolinker.link(feature.properties['SHAPE_AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_LEN'] !== null ? autolinker.link(feature.properties['SHAPE_LEN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Construcciones_Otanche_3_0() {
+            return {
+                pane: 'pane_Construcciones_Otanche_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(136,151,164,0.8509803921568627)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Construcciones_Otanche_3');
+        map.getPane('pane_Construcciones_Otanche_3').style.zIndex = 403;
+        map.getPane('pane_Construcciones_Otanche_3').style['mix-blend-mode'] = 'normal';
+        var layer_Construcciones_Otanche_3 = new L.geoJson(json_Construcciones_Otanche_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Construcciones_Otanche_3',
+            layerName: 'layer_Construcciones_Otanche_3',
+            pane: 'pane_Construcciones_Otanche_3',
+            onEachFeature: pop_Construcciones_Otanche_3,
+            style: style_Construcciones_Otanche_3_0,
+        });
+        bounds_group.addLayer(layer_Construcciones_Otanche_3);
+        function pop_Vas_Otanche_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPO_VIA</strong><br />' + (feature.properties['TIPO_VIA'] !== null ? autolinker.link(feature.properties['TIPO_VIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>PROYECTO</strong><br />' + (feature.properties['PROYECTO'] !== null ? autolinker.link(feature.properties['PROYECTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>EJE_VIAL</strong><br />' + (feature.properties['EJE_VIAL'] !== null ? autolinker.link(feature.properties['EJE_VIAL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>AREA_OFICI</strong><br />' + (feature.properties['AREA_OFICI'] !== null ? autolinker.link(feature.properties['AREA_OFICI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NOM_DEPART</strong><br />' + (feature.properties['NOM_DEPART'] !== null ? autolinker.link(feature.properties['NOM_DEPART'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NOM_MUNICI</strong><br />' + (feature.properties['NOM_MUNICI'] !== null ? autolinker.link(feature.properties['NOM_MUNICI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>COD_DEPTO</strong><br />' + (feature.properties['COD_DEPTO'] !== null ? autolinker.link(feature.properties['COD_DEPTO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Vas_Otanche_4_0(feature) {
+            switch(String(feature.properties['TIPO_VIA'])) {
+                case '1':
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(252,158,50,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(222,40,98,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(30,226,79,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(207,95,235,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(21,196,215,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(59,67,208,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Vas_Otanche_4',
+                opacity: 1,
+                color: 'rgba(198,236,135,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Vas_Otanche_4');
+        map.getPane('pane_Vas_Otanche_4').style.zIndex = 404;
+        map.getPane('pane_Vas_Otanche_4').style['mix-blend-mode'] = 'normal';
+        var layer_Vas_Otanche_4 = new L.geoJson(json_Vas_Otanche_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Vas_Otanche_4',
+            layerName: 'layer_Vas_Otanche_4',
+            pane: 'pane_Vas_Otanche_4',
+            onEachFeature: pop_Vas_Otanche_4,
+            style: style_Vas_Otanche_4_0,
+        });
+        bounds_group.addLayer(layer_Vas_Otanche_4);
+        map.addLayer(layer_Vas_Otanche_4);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Vías_Otanche<br /><table><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_31.png" /></td><td>3</td></tr><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_42.png" /></td><td>4</td></tr><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_53.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_64.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_75.png" /></td><td>7</td></tr><tr><td style="text-align: center;"><img src="legend/Vas_Otanche_4_6.png" /></td><td></td></tr></table>': layer_Vas_Otanche_4,'<img src="legend/Construcciones_Otanche_3.png" /> Construcciones_Otanche': layer_Construcciones_Otanche_3,'<img src="legend/CurvasNivel_Otanche_2.png" /> CurvasNivel_Otanche': layer_CurvasNivel_Otanche_2,'Ecosistemas_Otanche<br /><table><tr><td style="text-align: center;"><img src="legend/Ecosistemas_Otanche_1_Agroecosistemascampesinosmixtos0.png" /></td><td>Agroecosistemas campesinos mixtos</td></tr><tr><td style="text-align: center;"><img src="legend/Ecosistemas_Otanche_1_AgroecosistemasLecheros1.png" /></td><td>Agroecosistemas Lecheros</td></tr><tr><td style="text-align: center;"><img src="legend/Ecosistemas_Otanche_1_Areasruralesintervenidas2.png" /></td><td>Areas rurales intervenidas</td></tr><tr><td style="text-align: center;"><img src="legend/Ecosistemas_Otanche_1_BMDAndinosyAltoandinosdeRoble3.png" /></td><td>BMD Andinos y Alto-andinos de Roble</td></tr><tr><td style="text-align: center;"><img src="legend/Ecosistemas_Otanche_1_BMDHúmedosAndinos4.png" /></td><td>BMD Húmedos Andinos</td></tr><tr><td style="text-align: center;"><img src="legend/Ecosistemas_Otanche_1_5.png" /></td><td></td></tr></table>': layer_Ecosistemas_Otanche_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
